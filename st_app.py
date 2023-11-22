@@ -10,6 +10,8 @@ def main():
     # Add a sidebar with some information
     st.sidebar.header("About")
     st.sidebar.text("This is a simple app to calculate the square of a number.")
+    st.sidebar.text("This is a simple app to calculate the square of a number.")
+
 
     # Get user input for a number
     user_input = st.number_input("Enter a number:", min_value=0)
