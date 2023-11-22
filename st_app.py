@@ -1,15 +1,20 @@
 import streamlit as st
-import requests
+from openai import OpenAI
 
-# DALL-E API endpoint (replace with the actual endpoint if available)
-dalle_api_endpoint = "https://example.com/dalle/api"
+client = OpenAI()
 
 def make_dalle_request(prompt):
     try:
-        response = requests.post(dalle_api_endpoint, json={"prompt": prompt})
+        response = client.images.generate(
+            model="dall-e-3",
+            prompt=prompt,
+            size="1024x1024",
+            quality="standard",
+            n=1,
+        )
         response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
-        return response.json().get("image_url", "https://example.com/default_pizza.jpg")
-    except requests.exceptions.RequestException as e:
+        return response.data[0].url
+    except Exception as e:
         st.error(f"Error making DALL-E API request: {e}")
         return "https://example.com/default_pizza.jpg"
 
