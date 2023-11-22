@@ -24,14 +24,16 @@ def generate_pizza_image(toppings):
 def main():
     st.title("Pizza Toppings Selector")
 
-    topping1 = st.selectbox("Select Topping 1", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
-    topping2 = st.selectbox("Select Topping 2", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
-    topping3 = st.selectbox("Select Topping 3", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
+    # Create a sidebar for input fields
+    st.sidebar.header("Select Toppings")
+    topping1 = st.sidebar.selectbox("Topping 1", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
+    topping2 = st.sidebar.selectbox("Topping 2", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
+    topping3 = st.sidebar.selectbox("Topping 3", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
 
     selected_toppings = [topping1, topping2, topping3]
 
-    # Display a single pizza image with all three selected toppings
-    st.image(generate_pizza_image(selected_toppings), caption="Combined Toppings", width=400)
+    # Display a single pizza image with all three selected toppings in the center
+    st.image(generate_pizza_image(selected_toppings), caption="Combined Toppings", width=400, use_container_width=True)
 
     st.write(f"You have selected toppings: {topping1}, {topping2}, {topping3}")
 
