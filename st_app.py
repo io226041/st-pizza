@@ -1,28 +1,18 @@
-# Import necessary libraries
 import streamlit as st
 
-
-# Define the main function for your app
 def main():
-    # Give your app a title
-    st.title("Simple Square Calculator")
+    st.title("Pizza Toppings Selector")
 
-    # Add a sidebar with some information
-    st.sidebar.header("About")
-    st.sidebar.text("This is a simple app to calculate the square of a number.")
-    st.sidebar.text("This is a simple app to calculate the square of a number.")
+    # Option field for "topping1" with 7 values
+    topping1 = st.selectbox("Select Topping 1", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
 
+    # Option field for "topping2" with 7 values
+    topping2 = st.selectbox("Select Topping 2", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
 
-    # Get user input for a number
-    user_input = st.number_input("Enter a number:", min_value=0)
+    # Option field for "topping3" with 7 values
+    topping3 = st.selectbox("Select Topping 3", ["Pepperoni", "Mushrooms", "Onions", "Sausage", "Bacon", "Olives", "Cheese"])
 
-    # Calculate the square of the input number
-    square_result = user_input ** 2
+    st.write(f"You have selected toppings: {topping1}, {topping2}, {topping3}")
 
-    # Display the result
-    st.write(f"The square of {user_input} is: {square_result}")
-
-
-# Run the app
 if __name__ == "__main__":
     main()
