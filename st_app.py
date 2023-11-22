@@ -1,25 +1,22 @@
 import streamlit as st
+import requests
 
-# Placeholder function for generating pizza images using DALL-E API
+# DALL-E API endpoint (replace with the actual endpoint if available)
+dalle_api_endpoint = "https://example.com/dalle/api"
+
+def make_dalle_request(prompt):
+    try:
+        response = requests.post(dalle_api_endpoint, json={"prompt": prompt})
+        response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
+        return response.json().get("image_url", "https://example.com/default_pizza.jpg")
+    except requests.exceptions.RequestException as e:
+        st.error(f"Error making DALL-E API request: {e}")
+        return "https://example.com/default_pizza.jpg"
+
 def generate_pizza_image(toppings):
-    # Replace this with actual DALL-E API calls to generate pizza images
-    # Simulating the image URL based on the toppings for illustration
-    toppings_to_images = {
-        "Pepperoni": "https://example.com/pepperoni_pizza.jpg",
-        "Mushrooms": "https://example.com/mushroom_pizza.jpg",
-        "Onions": "https://example.com/onion_pizza.jpg",
-        "Sausage": "https://example.com/sausage_pizza.jpg",
-        "Bacon": "https://example.com/bacon_pizza.jpg",
-        "Olives": "https://example.com/olive_pizza.jpg",
-        "Cheese": "https://example.com/cheese_pizza.jpg",
-    }
-
-    # Concatenate images for selected toppings into a single image
-    combined_image_url = "https://example.com/default_pizza.jpg"  # Default image URL
-    for topping in toppings:
-        combined_image_url += "_" + toppings_to_images.get(topping, "default")
-
-    return combined_image_url
+    # Construct a text prompt for DALL-E
+    prompt = f"A round pizza with toppings: {', '.join(toppings)}"
+    return make_dalle_request(prompt)
 
 def main():
     st.title("Pizza Toppings Selector")
@@ -33,8 +30,7 @@ def main():
     selected_toppings = [topping1, topping2, topping3]
 
     # Display a single pizza image with all three selected toppings in the center
-    # st.image(generate_pizza_image(selected_toppings), caption="Combined Toppings", width=400, use_container_width=True)
-    st.write(generate_pizza_image(selected_toppings), caption="Combined Toppings", width=400, use_container_width=True)
+    st.image(generate_pizza_image(selected_toppings), caption="Combined Toppings", width=400, use_container_width=True)
 
     st.write(f"You have selected toppings: {topping1}, {topping2}, {topping3}")
 
