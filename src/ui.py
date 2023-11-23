@@ -12,7 +12,7 @@ def paint_pizza_image(toppings, img_gen_model, mock):
 def app_main_frame(pizza_config, predicted_price, img_gen_model):
     st.title("Pizza Price Predictor")
     paint_pizza_image(pizza_config.toppings, img_gen_model, mock=True)
-    st.header(f"ca. **{predicted_price:.2f}** €".replace(".", ","))
+    st.header(f"price: **{predicted_price:.2f}** €".replace(".", ","))
 
 
 def app_sidebar():
