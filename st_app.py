@@ -39,7 +39,7 @@ def main():
     selected_toppings = [topping1, topping2, topping3]
 
     # Display a single pizza image with all three selected toppings in the center
-    st.image(generate_pizza_image(selected_toppings), caption="Combined Toppings", width=400, use_container_width=True)
+    st.image(generate_pizza_image(selected_toppings), caption="Combined Toppings", width=400)
 
     st.write(f"You have selected toppings: {topping1}, {topping2}, {topping3}")
 
