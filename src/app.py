@@ -2,8 +2,8 @@ import os
 from dataclasses import dataclass
 import streamlit as st
 
-from backend import predict_price, create_model
-from ui import app_main_frame, app_sidebar
+from src.backend import predict_price, create_model
+from src.ui import app_main_frame, app_sidebar
 
 TOPPINGS = {
     "sauce": ["Tomato Sauce", "Pesto", "Alfredo"],

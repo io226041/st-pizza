@@ -1,6 +1,6 @@
 import streamlit as st
 
-from backend import generate_pizza_image
+from src.backend import generate_pizza_image
 
 
 def paint_pizza_image(toppings, img_gen_model, mock):
@@ -18,7 +18,7 @@ def app_main_frame(pizza_config, predicted_price, img_gen_model):
 def app_sidebar():
     st.sidebar.write("Toppings")
     toppings = []
-    from st_app import TOPPINGS
+    from src.app import TOPPINGS
     for i, (name, vals) in enumerate(TOPPINGS.items()):
         toppings.append(st.sidebar.selectbox(label=f"#{i + 1} - {name}", options=([f"no {name}"] + vals),
                                              label_visibility="collapsed"))
@@ -32,7 +32,7 @@ def app_sidebar():
     location_choice = st.sidebar.radio("Location", [0, 1], format_func=lambda x: location_labels[x])
     rating = st.sidebar.select_slider("Restaurant Raiting", [1, 2, 3, 4, 5, 6], format_func=lambda x: f"{x * '★'}")
 
-    from st_app import PizzaConfig
+    from src.app import PizzaConfig
     return PizzaConfig(
         toppings=toppings,
         size=pizza_size,
