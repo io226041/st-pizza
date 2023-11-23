@@ -16,7 +16,7 @@ def make_dalle_request(prompt):
             quality="standard",
             n=1,
         )
-        response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
+        #response.raise_for_status()  # Raise an error for bad responses (e.g., 4xx, 5xx)
         return response.data[0].url
     except Exception as e:
         st.error(f"Error making DALL-E API request: {e}")
