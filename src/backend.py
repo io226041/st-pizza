@@ -6,19 +6,23 @@ from sklearn.model_selection import train_test_split
 from statsmodels import api as sm
 
 import warnings
+
 warnings.filterwarnings("ignore")
 
-
 client = None
+
+
+def is_topic_set(x):
+    return not x.startswith("no")
 
 
 def predict_price(pizza_config, model):
 
     data = {
         'Intercept': [2],
-        'Topping 1': [not pizza_config.toppings[0].startswith("no")],
-        'Topping 2': [not pizza_config.toppings[1].startswith("no")],
-        'Topping 3': [not pizza_config.toppings[2].startswith("no")],
+        'Topping 1': [is_topic_set(pizza_config.toppings[0])],
+        'Topping 2': [is_topic_set(pizza_config.toppings[1])],
+        'Topping 3': [is_topic_set(pizza_config.toppings[2])],
         'Size': [pizza_config.size],
         'Extras Sauce': [int(pizza_config.extra_sauce)],
         'Extra Cheese': [int(pizza_config.extra_cheese)],
@@ -48,7 +52,7 @@ def create_model(csv_file):
     X = df.drop(['Relative Price', 'Pizza Name', 'Topping 3_Meat', 'Topping 3_None', 'Topping 4_Fish', 'Topping 4_None',
                  'Overall Weight'], axis=1)  # write your code here
     X = sm.add_constant(X)
-    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.30 , random_state=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size=0.30, random_state=1)
     # create the model
     model = sm.OLS(y_train, X_train).fit()  # write your code here
     print(model.summary())
