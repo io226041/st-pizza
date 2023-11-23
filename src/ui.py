@@ -12,7 +12,7 @@ def paint_pizza_image(toppings, img_gen_model, mock):
 def app_main_frame(pizza_config, predicted_price, img_gen_model):
     st.title("Pizza Price Predictor")
     paint_pizza_image(pizza_config.toppings, img_gen_model, mock=True)
-    st.header(f"**{predicted_price:.2f}** €".replace(".", ","))
+    st.header(f"ca. **{predicted_price:.2f}** €".replace(".", ","))
 
 
 def app_sidebar():
@@ -27,10 +27,10 @@ def app_sidebar():
     pizza_size = st.sidebar.select_slider("Size", [0, 1, 2], 1, format_func=lambda x: size_labels[x])
     extra_sauce = st.sidebar.toggle("Extra Sauce")
     extra_cheese = st.sidebar.toggle("Extra Cheese")
-    distance = st.sidebar.select_slider("Distance from City Center", [1, 3, 5, 10], format_func=lambda x: f"{x}km")
+    distance = st.sidebar.select_slider("Distance from City Center", [1, 3, 5, 10], 3, format_func=lambda x: f"{x}km")
     location_labels = {0: "Take-Away", 1: "Dine-In"}
     location_choice = st.sidebar.radio("Location", [0, 1], format_func=lambda x: location_labels[x])
-    rating = st.sidebar.select_slider("Restaurant Raiting", [1, 2, 3, 4, 5, 6], format_func=lambda x: f"{x * '★'}")
+    rating = st.sidebar.select_slider("Restaurant Raiting", [1, 2, 3, 4, 5, 6], 4, format_func=lambda x: f"{x * '★'}")
 
     from src.app import PizzaConfig
     return PizzaConfig(
