@@ -24,7 +24,7 @@ def make_dalle_request(prompt):
 
 def generate_pizza_image(toppings):
     # Construct a text prompt for DALL-E
-    prompt = f"A round pizza with toppings: {', '.join(toppings)}"
+    prompt = f"A round pizza on a black table with toppings: {', '.join(toppings)}"
     return make_dalle_request(prompt)
 
 def main():
