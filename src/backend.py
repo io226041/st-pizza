@@ -1,3 +1,5 @@
+import os
+
 import streamlit as st
 
 import pandas as pd
@@ -59,7 +61,7 @@ def create_model(csv_file):
     return model
 
 
-def make_dalle_request(prompt, img_gen_model):
+def make_dalle_request(prompt, img_gen_model, img_size):
     try:
         global client
         if client is None:
@@ -67,7 +69,7 @@ def make_dalle_request(prompt, img_gen_model):
         response = client.images.generate(
             model=img_gen_model,
             prompt=prompt,
-            size="1024x1024",
+            size=img_size,
             quality="standard",
             n=1,
         )
@@ -75,11 +77,11 @@ def make_dalle_request(prompt, img_gen_model):
         return response.data[0].url
     except Exception as e:
         st.error(f"Error making DALL-E API request: {e}")
-        return "https://example.com/default_pizza.jpg"
+        return ""
 
 
-def generate_pizza_image(toppings, img_gen_model, mock):
-    if mock:
+def generate_pizza_image(toppings, img_gen_model):
+    if img_gen_model == "mock":
         return f"https://picsum.photos/seed/{'-'.join(toppings)}/200"
     # Construct a text prompt for DALL-E
     prompt = f"A round pizza on a black table with toppings: {', '.join(toppings)}"

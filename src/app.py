@@ -12,7 +12,9 @@ TOPPINGS = {
     # "chease": ["Cheddar", "Mozzarella", "Parmesan", "Feta"],
 }
 
-IMG_GEN_MODEL = "dall-e-3"
+# IMG_GEN_MODEL = "dall-e-2"
+IMG_GEN_MODEL = "mock"
+
 os.environ['OPENAI_API_KEY'] = st.secrets['OPENAI_API_KEY']
 
 
